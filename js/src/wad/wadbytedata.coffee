@@ -9,24 +9,23 @@ class ctx.WadByteData
     @lengthInBytes = @data.byteLength
     @offsetInBytes = 0
 
-  getInt8: (position) ->
-    @dataView.getInt8(@offsetInBytes + position)
-  getUInt8: (position) ->
-    @dataView.getUint8(@offsetInBytes + position)
-  getInt16: (position) ->
-    @dataView.getInt16(@offsetInBytes + position, LITTLE_ENDIAN)
-  getUInt16: (position) ->
-    @dataView.getUint16(@offsetInBytes + position, LITTLE_ENDIAN)
-  getInt32: (position) ->
-    @dataView.getInt32(@offsetInBytes + position, LITTLE_ENDIAN)
-  getUInt32: (position) ->
-    @dataView.getUint32(@offsetInBytes + position, LITTLE_ENDIAN)
+  getInt8: (offset) ->
+    @dataView.getInt8(@offsetInBytes + offset)
+  getUInt8: (offset) ->
+    @dataView.getUint8(@offsetInBytes + offset)
+  getInt16: (offset) ->
+    @dataView.getInt16(@offsetInBytes + offset, LITTLE_ENDIAN)
+  getUInt16: (offset) ->
+    @dataView.getUint16(@offsetInBytes + offset, LITTLE_ENDIAN)
+  getInt32: (offset) ->
+    @dataView.getInt32(@offsetInBytes + offset, LITTLE_ENDIAN)
+  getUInt32: (offset) ->
+    @dataView.getUint32(@offsetInBytes + offset, LITTLE_ENDIAN)
 
   getString: (offset, length) ->
     intValues = []
     for i in [0..length-1]
-      @offsetInBytes += offset
-      val = @getUInt8(@offsetInBytes + i)
+      val = @getUInt8(@offsetInBytes + offset + i)
       if val == 0
         break
       intValues.push(val)
