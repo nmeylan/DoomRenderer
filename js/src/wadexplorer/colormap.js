@@ -31,24 +31,25 @@
       ctx.consoleText = document.querySelector('#consoleText');
       ctx.consoleHolder = document.querySelector('#consoleHolder');
       ctx.content = document.querySelector('#content');
-      ctx.printToConsole('Read playpal');
+      ctx.printToConsole('Read colormap');
       return ctx.loadFile(callback);
     };
     callback = function() {
-      var arrayBuffer, color, i, palette, wad, _i, _j, _len, _ref, _results;
+      var arrayBuffer, c, color, i, wad, _i, _j, _len, _len1, _ref, _results;
       arrayBuffer = this.response;
       if (arrayBuffer) {
         wad = new ctx.Wad;
         wad.read(arrayBuffer);
-        wad.readPlaypal();
+        wad.readColormap();
         i = 0;
-        _ref = wad.playpal.palettes;
+        _ref = wad.colormap.colors;
         _results = [];
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          palette = _ref[_i];
+          color = _ref[_i];
           ctx.content.appendHtml("<div class='palette' id='palette-" + i + "'></div>");
-          for (color = _j = 0; _j <= 255; color = _j += 1) {
-            document.querySelector('#palette-' + i).appendHtml("<span class='color' style='background-color: rgb(" + palette.r[color] + "," + palette.g[color] + "," + palette.b[color] + ")'></span>");
+          for (_j = 0, _len1 = color.length; _j < _len1; _j++) {
+            c = color[_j];
+            document.querySelector('#palette-' + i).appendHtml("<span class='color' style='background-color: rgb(" + c + "," + c + "," + c + ")'></span>");
           }
           _results.push(i++);
         }
@@ -60,4 +61,4 @@
 
 }).call(this);
 
-//# sourceMappingURL=playpal.js.map
+//# sourceMappingURL=colormap.js.map

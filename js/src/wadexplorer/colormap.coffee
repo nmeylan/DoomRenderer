@@ -21,8 +21,8 @@ requirejs.config(
 )
 
 require(['dom/element',
-        'util/console',
-        'util/String',
+         'util/console',
+         'util/String',
          'wad/wadbytedata',
          'wad/wad',
          'wad/wadloader'
@@ -31,7 +31,7 @@ require(['dom/element',
     ctx.consoleText = document.querySelector('#consoleText')
     ctx.consoleHolder = document.querySelector('#consoleHolder')
     ctx.content = document.querySelector('#content')
-    ctx.printToConsole('Read playpal')
+    ctx.printToConsole('Read colormap')
     ctx.loadFile(callback)
 
   callback = ->
@@ -39,14 +39,15 @@ require(['dom/element',
     if arrayBuffer
       wad = new ctx.Wad
       wad.read(arrayBuffer)
-      wad.readPlaypal()
-      i = 0
-      for palette in wad.playpal.palettes
-        ctx.content.appendHtml("<div class='palette' id='palette-"+i+"'></div>")
-        for color in [0..255] by 1
-          document.querySelector('#palette-'+i).appendHtml("<span class='color' style='background-color: rgb("+palette.r[color]+","+palette.g[color]+","+palette.b[color]+")'></span>")
-        i++
+      wad.readColormap()
 
+      i = 0
+
+      for color in wad.colormap.colors
+        ctx.content.appendHtml("<div class='palette' id='palette-"+i+"'></div>")
+        for c in color
+          document.querySelector('#palette-'+i).appendHtml("<span class='color' style='background-color: rgb("+c+","+c+","+c+")'></span>")
+        i++
 
 
 

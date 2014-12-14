@@ -47,6 +47,9 @@ class ctx.Wad
   readPlaypal: ->
     @playpal = new Playpal(@lumpHash["PLAYPAL"].getByteData(@data))
 
+  readColormap: ->
+    @colormap = new Colormap(@lumpHash["COLORMAP"].getByteData(@data))
+
   collectLumpInfo: ->
     for i in[0..@header.numberLumps - 1] by 1
       offset = @header.lumpInfoTableOffset + i * DIRECTORY_LUMP_ENTRY_SIZE
@@ -55,6 +58,17 @@ class ctx.Wad
       name = @data.getString(offset + 0x08, 8)
       lumpInfo = new LumpInfo(name, position, size)
       @lumpHash[name] = lumpInfo
+
+
+class Colormap
+  constructor: (@data) ->
+    @colors = []
+    position = 0
+    for i in [0..COLORMAP_SIZE - 1] by 1
+      @colors[i] = new Uint8Array(256)
+      for j in [0..255] by 1
+        @colors[i][j] = @data.getUInt8(position++)
+
 
 
 class Playpal
