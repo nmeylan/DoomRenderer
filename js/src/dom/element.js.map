@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "element.js",
+  "sourceRoot": "",
+  "sources": [
+    "element.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,EAAA,OAAO,CAAC,SAAS,CAAC,UAAlB,GAA+B,SAAC,IAAD,GAAA;WAC7B,IAAI,CAAC,SAAL,GAAiB,IAAI,CAAC,SAAL,GAAiB,KADL;EAAA,CAA/B,CAAA;AAAA"
+}
