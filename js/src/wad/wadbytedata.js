@@ -18,6 +18,12 @@
       this.offsetInBytes = 0;
     }
 
+    WadByteData.prototype.view = function(offset, length) {
+      var _ref;
+      this.offsetInBytes = offset;
+      return this.lengthInBytes = (_ref = length === null) != null ? _ref : this.lengthInBytes - this.offsetInBytes;
+    };
+
     WadByteData.prototype.getInt8 = function(offset) {
       return this.dataView.getInt8(this.offsetInBytes + offset);
     };

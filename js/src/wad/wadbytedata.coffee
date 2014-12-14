@@ -9,6 +9,10 @@ class ctx.WadByteData
     @lengthInBytes = @data.byteLength
     @offsetInBytes = 0
 
+  view: (offset, length)->
+    @offsetInBytes = offset
+    @lengthInBytes = length == null ? @lengthInBytes - @offsetInBytes : length
+
   getInt8: (offset) ->
     @dataView.getInt8(@offsetInBytes + offset)
   getUInt8: (offset) ->
