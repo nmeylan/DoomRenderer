@@ -2,7 +2,7 @@ ctx = window.applicationContext
 
 DIRECTORY_LUMP_ENTRY_SIZE = 16
 NUMBER_PALETTES = 14
-
+COLORMAP_SIZE = 34
 LUMP_NAMES = [
   "BLOCKMAP",
   "COLORMAP",
@@ -32,7 +32,6 @@ class ctx.Wad
   read: (data) ->
     @data = new ctx.WadByteData(data)
     @readHeader()
-    @playpall = new Playpal(@lumpHash["PLAYPAL"].getByteData(@data))
 
   readHeader: () ->
     @header.identification = @data.getString(0, 4)
@@ -45,6 +44,8 @@ class ctx.Wad
       throw 'Can\'t contains all lump tables'
     @collectLumpInfo()
 
+  readPlaypal: ->
+    @playpal = new Playpal(@lumpHash["PLAYPAL"].getByteData(@data))
 
   collectLumpInfo: ->
     for i in[0..@header.numberLumps - 1] by 1

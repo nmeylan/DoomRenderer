@@ -6,17 +6,17 @@
 
   WAD_PATH = 'resources/doom.wad';
 
-  ctx.loadFile = function() {
-    return httpGet(WAD_PATH);
+  ctx.loadFile = function(callack) {
+    return httpGet(WAD_PATH, callack);
   };
 
-  httpGet = function(url) {
+  httpGet = function(url, callack) {
     var xmlHttp;
     xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", url, true);
     xmlHttp.responseType = 'arraybuffer';
     xmlHttp.addEventListener("progress", updateProgress, false);
-    xmlHttp.addEventListener("loadend", loadEnd, false);
+    xmlHttp.addEventListener("loadend", callack || loadEnd, false);
     return xmlHttp.send();
   };
 
