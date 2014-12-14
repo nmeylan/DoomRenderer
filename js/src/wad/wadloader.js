@@ -6,8 +6,8 @@
 
   WAD_PATH = 'resources/doom.wad';
 
-  ctx.loadFile = function(callack) {
-    return httpGet(WAD_PATH, callack);
+  ctx.loadFile = function(url, callack) {
+    return httpGet(url || WAD_PATH, callack);
   };
 
   httpGet = function(url, callack) {

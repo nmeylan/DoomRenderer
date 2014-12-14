@@ -1,8 +1,8 @@
 ctx = window.applicationContext
 WAD_PATH = 'resources/doom.wad'
 
-ctx.loadFile = (callack) ->
-  httpGet(WAD_PATH, callack)
+ctx.loadFile = (url, callack) ->
+  httpGet(url || WAD_PATH, callack)
 
 httpGet = (url, callack) ->
   xmlHttp = new XMLHttpRequest()

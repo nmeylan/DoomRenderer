@@ -17,7 +17,7 @@
   ctx = window.applicationContext;
 
   requirejs.config({
-    baseUrl: 'js/src',
+    baseUrl: '../js/src',
     paths: {
       dom: 'dom',
       util: 'util',
@@ -32,7 +32,7 @@
       ctx.consoleHolder = document.querySelector('#consoleHolder');
       ctx.content = document.querySelector('#content');
       ctx.printToConsole('Read playpal');
-      return ctx.loadFile(callback);
+      return ctx.loadFile('../resources/doom.wad', callback);
     };
     callback = function() {
       var arrayBuffer, color, i, palette, wad, _i, _j, _len, _ref, _results;

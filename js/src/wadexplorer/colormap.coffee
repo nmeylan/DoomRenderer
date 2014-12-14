@@ -13,7 +13,7 @@ window.applicationContext = {
 ctx = window.applicationContext
 
 requirejs.config(
-  baseUrl: 'js/src'
+  baseUrl: '../js/src'
   paths:
     dom: 'dom'
     util: 'util'
@@ -32,7 +32,7 @@ require(['dom/element',
     ctx.consoleHolder = document.querySelector('#consoleHolder')
     ctx.content = document.querySelector('#content')
     ctx.printToConsole('Read colormap')
-    ctx.loadFile(callback)
+    ctx.loadFile('../resources/doom.wad', callback)
 
   callback = ->
     arrayBuffer = this.response
