@@ -35,7 +35,7 @@
       return ctx.loadFile('../resources/doom.wad', callback);
     };
     callback = function() {
-      var arrayBuffer, color, i, palette, wad, _i, _j, _len, _ref, _results;
+      var arrayBuffer, color, i, palette, span, wad, _i, _j, _len, _ref, _results;
       arrayBuffer = this.response;
       if (arrayBuffer) {
         wad = new ctx.Wad;
@@ -48,7 +48,8 @@
           palette = _ref[_i];
           ctx.content.appendHtml("<div class='palette' id='palette-" + i + "'></div>");
           for (color = _j = 0; _j <= 255; color = _j += 1) {
-            document.querySelector('#palette-' + i).appendHtml("<span class='color' style='background-color: rgb(" + palette.r[color] + "," + palette.g[color] + "," + palette.b[color] + ")'></span>");
+            span = "<span class='color' style='background-color: rgb(" + palette.r[color] + "," + palette.g[color] + "," + palette.b[color] + ")'></span>";
+            document.querySelector('#palette-' + i).appendHtml(span);
           }
           _results.push(i++);
         }

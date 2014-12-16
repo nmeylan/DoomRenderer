@@ -27,6 +27,8 @@ require(['dom/element',
          'wad/wad',
          'wad/wadloader'
   ], (element) ->
+
+
   startup = ->
     ctx.consoleText = document.querySelector('#consoleText')
     ctx.consoleHolder = document.querySelector('#consoleHolder')
@@ -44,7 +46,8 @@ require(['dom/element',
       for palette in wad.playpal.palettes
         ctx.content.appendHtml("<div class='palette' id='palette-"+i+"'></div>")
         for color in [0..255] by 1
-          document.querySelector('#palette-'+i).appendHtml("<span class='color' style='background-color: rgb("+palette.r[color]+","+palette.g[color]+","+palette.b[color]+")'></span>")
+          span = "<span class='color' style='background-color: rgb("+palette.r[color]+","+palette.g[color]+","+palette.b[color]+")'></span>"
+          document.querySelector('#palette-'+i).appendHtml(span)
         i++
 
 

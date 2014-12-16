@@ -69,8 +69,6 @@ class Colormap
       for j in [0..255] by 1
         @colors[i][j] = @data.getUInt8(position++)
 
-
-
 class Playpal
   constructor: (@data) ->
     @palettes = []
