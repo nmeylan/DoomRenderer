@@ -21,7 +21,9 @@
     WadByteData.prototype.view = function(offset, length) {
       var _ref;
       this.offsetInBytes = offset;
-      return this.lengthInBytes = (_ref = length === null) != null ? _ref : this.lengthInBytes - this.offsetInBytes;
+      return this.lengthInBytes = (_ref = length === null) != null ? _ref : this.lengthInBytes - {
+        offset: length
+      };
     };
 
     WadByteData.prototype.getInt8 = function(offset) {
@@ -52,7 +54,7 @@
       var i, intValues, val, _i, _ref;
       intValues = [];
       for (i = _i = 0, _ref = length - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
-        val = this.getUInt8(this.offsetInBytes + offset + i);
+        val = this.getUInt8(offset + i);
         if (val === 0) {
           break;
         }

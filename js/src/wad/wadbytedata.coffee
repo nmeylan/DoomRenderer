@@ -11,7 +11,7 @@ class ctx.WadByteData
 
   view: (offset, length)->
     @offsetInBytes = offset
-    @lengthInBytes = length == null ? @lengthInBytes - @offsetInBytes : length
+    @lengthInBytes = ((length == null) ? @lengthInBytes - offset : length)
 
   getInt8: (offset) ->
     @dataView.getInt8(@offsetInBytes + offset)
@@ -29,9 +29,8 @@ class ctx.WadByteData
   getString: (offset, length) ->
     intValues = []
     for i in [0..length-1]
-      val = @getUInt8(@offsetInBytes + offset + i)
+      val = @getUInt8(offset + i)
       if val == 0
         break
       intValues.push(val)
     String.fromCharCodes(intValues).toUpperCase()
-
