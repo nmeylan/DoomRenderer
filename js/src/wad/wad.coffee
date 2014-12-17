@@ -50,6 +50,16 @@ class ctx.Wad
   readColormap: ->
     @colormap = new Colormap(@lumpHash["COLORMAP"].getByteData(@data))
 
+  readTextures: ->
+    @textures = {}
+    textureLump = @lumpHash["TEXTURE1"].getByteData(@data)
+    numberTexture = textureLump.getInt32(0)
+    for i in [0..numberTexture - 1] by 1
+      textureOffset = textureLump.getInt32(0x04 + (0x04 * i))
+      textureName = textureLump.getString(textureOffset, 8)
+      texture = new Texture(textureName, @data, textureOffset + 0x08)
+      @textures[textureName] = texture
+
   collectLumpInfo: ->
     for i in[0..@header.numberLumps - 1] by 1
       offset = @header.lumpInfoTableOffset + i * DIRECTORY_LUMP_ENTRY_SIZE
@@ -59,6 +69,13 @@ class ctx.Wad
       lumpInfo = new LumpInfo(name, position, size)
       @lumpHash[name] = lumpInfo
 
+
+class Texture
+  constructor:(@name, @data,@offset) ->
+    @width = @data.getInt16(offset + 0x04)
+    @height = @data.getInt16(offset + 0x06)
+    @xCenter = 0
+    @yCenter = 0
 
 class Colormap
   constructor: (@data) ->
@@ -91,5 +108,6 @@ class LumpInfo
   constructor: (@name, @position, @size) ->
 
   getByteData: (data) ->
+    console.log(@position)
     data.view(@position, @size)
     data
